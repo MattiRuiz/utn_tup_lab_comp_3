@@ -1,5 +1,5 @@
-const Body = ({ pageBody }) => {
-  return <div>{pageBody}</div>;
+const Body = ({ body }) => {
+  return <p>{body}</p>;
 };
 
 export default Body;

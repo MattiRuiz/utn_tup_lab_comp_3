@@ -8,16 +8,16 @@ const site = {
 };
 
 const links = {
-  google: "https://www.google.com",
-  instagram: "https://www.instagram.com",
+  Google: "https://www.google.com",
+  Instagram: "https://www.instagram.com",
 };
 
 export default function Practica2() {
   return (
     <div>
       <Page>
-        <Header pageTitle={site.pageTitle} />
-        <Main pageBody={site.pageBody} links={links} />
+        <Header title={site.pageTitle} />
+        <Main body={site.pageBody} links={links} />
       </Page>
     </div>
   );

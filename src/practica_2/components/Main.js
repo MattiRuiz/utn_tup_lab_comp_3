@@ -1,18 +1,20 @@
 import Body from "./Body";
+import BlogPost from "./BlogPost";
 
-const Main = ({ pageBody, links }) => {
-  const variosLinks = Object.values(links).map((link) => (
+const Main = ({ body, links }) => {
+  const variosLinks = Object.keys(links).map((key) => (
     <li>
-      <a href={link}>{link}</a>
+      <a href={links[key]}>{key}</a>
     </li>
   ));
   return (
-    <div>
-      <Body pageBody={pageBody} />
+    <div className="main-style">
+      <Body body={body.toUpperCase()} />
       <nav>
         <ul>{variosLinks}</ul>
       </nav>
       <p>Que linda esta quedando esta página!</p>
+      <BlogPost />
     </div>
   );
 };
