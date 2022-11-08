@@ -13,3 +13,12 @@
 .main-style p:first-child {
   font-style: italic;
 }
+.title-color {
+  color: blue;
+}
+.title-decoration {
+  text-transform: uppercase;
+}
+.body-page {
+  font-style: italic;
+}

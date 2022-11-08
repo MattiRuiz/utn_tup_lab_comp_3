@@ -1,83 +1,56 @@
 import { useState } from "react";
-import InputEditable from "./InputEditable";
+import TextInput from "./TextInput";
 
 export default function Practica3() {
-  const array = [];
-  const [infoInput, setInfoInput] = useState("");
-  const [valueArray, setValueArray] = useState(array);
+  const [input, setInput] = useState();
+  const [stuffList, setStuffList] = useState([]);
 
-  const handlerInput = (event) => {
-    setInfoInput(event.target.value);
+  const inputHandler = (event) => {
+    setInput(event.target.value);
   };
 
-  const handlerAddArray = () => {
-    if (infoInput) {
-      setValueArray([infoInput, ...valueArray]);
-    }
-    setInfoInput("");
-  };
-
-  const itemParseado = (item, index) => {
-    if (Math.trunc(item) % 2 === 0) {
-      return (
-        <li key={index}>
-          <strong>Par:</strong> {Math.trunc(item)}
-          <button type="button" onClick={borrarItem.bind(null, index)}>
-            Borrar
-          </button>
-        </li>
-      );
-    } else {
-      return (
-        <li key={index}>
-          <strong>Impar:</strong> {Math.trunc(item)}
-          <button type="button" onClick={borrarItem.bind(null, index)}>
-            Borrar
-          </button>
-        </li>
-      );
+  const addElement = () => {
+    if (input) {
+      const newList = [input, ...stuffList];
+      setStuffList(newList);
+      setInput("");
     }
   };
 
-  /*const borrarElemento = (event) => {
-    const deleteElement = event.target.name;
-    const newArray = valueArray.filter((item) => item !== deleteElement);
-    setValueArray(newArray);
-  };*/
-
-  const borrarItem = (index) => {
-    let newArray = [...valueArray];
-    newArray.splice(index, 1);
-    setValueArray(newArray);
+  const deleteElement = (index) => {
+    const newList = [...stuffList];
+    newList.splice(index, 1);
+    setStuffList(newList);
   };
 
-  const editItem = (index, newValue) => {
-    let newArrayEditable = { ...valueArray };
-    newArrayEditable.splice(index, 1, newValue);
-    setValueArray(newArrayEditable);
+  const editElement = (index, value) => {
+    const newList = [...stuffList];
+    newList.splice(index, 1, value);
+    setStuffList(newList);
   };
 
   return (
     <div>
-      <h3>Práctica 3</h3>
-      <h4>Ingrese información:</h4>
-      <form>
-        <input type="text" value={infoInput} onChange={handlerInput} />
-        <button type="button" onClick={handlerAddArray}>
-          Guardar
-        </button>
-      </form>
+      <input type="text" onChange={inputHandler} value={input} />
+      <button onClick={addElement}>Agregar</button>
+      <p>Lista de elementos:</p>
       <ul>
-        {valueArray.map((item, index) => (
-          <li key={index}>
-            {parseInt(item) ? (
-              itemParseado(item, index)
+        {stuffList.map((element, index) => (
+          <li key={Math.random()}>
+            {element}:{" "}
+            {parseInt(element) ? (
+              Math.round(parseInt(element)) % 2 ? (
+                "Impar"
+              ) : (
+                "Par"
+              )
             ) : (
-              <InputEditable
+              <TextInput
+                key={Math.random()}
+                element={element}
                 index={index}
-                value={item}
-                borrar={borrarItem}
-                editar={editItem}
+                borrar={deleteElement}
+                editar={editElement}
               />
             )}
           </li>
